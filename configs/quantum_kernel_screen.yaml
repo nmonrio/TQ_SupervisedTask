@@ -1,0 +1,33 @@
+experiment_name: quantum_kernel_screen
+output_dir: outputs/quantum_kernel_screen
+
+dataset:
+  name: breast_cancer
+  positive_label: malignant
+
+splitting:
+  outer_splits: 3
+  test_size: 0.2
+  inner_folds: 3
+  seeds: [0, 1, 2]
+
+metrics:
+  - accuracy
+  - balanced_accuracy
+  - roc_auc
+  - f1
+  - recall_positive
+
+models:
+  - name: quantum_kernel_screen
+    type: quantum_kernel_svm
+    preprocessing:
+      n_components: [4, 6]
+      angle_range: [-3.141592653589793, 3.141592653589793]
+    quantum:
+      encoding: [angle_y, angle_y_ring, zz_ring]
+      depth: [1, 2]
+      alpha: [1.0]
+    params:
+      C: [0.1, 1.0, 10.0]
+
