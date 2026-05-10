@@ -49,3 +49,16 @@ class QuantumKernelSVC:
         K_test = self.kernel.matrix(np.asarray(X, dtype=float), self.X_train_)
         return self._svc.decision_function(K_test)
 
+
+def build_classical_model(
+    model_type: str,
+    params: dict[str, object] | None = None,
+) -> SVC:
+    """Build a classical SVM baseline from a config-friendly model type."""
+
+    params = dict(params or {})
+    if model_type == "linear_svm":
+        return SVC(kernel="linear", **params)
+    if model_type == "rbf_svm":
+        return SVC(kernel="rbf", **params)
+    raise ValueError(f"unknown classical model type: {model_type}")

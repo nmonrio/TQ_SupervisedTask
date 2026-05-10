@@ -57,3 +57,23 @@ output_dir: outputs/test
     with pytest.raises(ValueError, match="outer_splits"):
         load_config(path)
 
+
+def test_classical_baselines_config_loads():
+    config = load_config(Path("configs/classical_baselines.yaml"))
+
+    assert config.experiment_name == "classical_baselines"
+    assert [model["type"] for model in config.models] == [
+        "rbf_svm",
+        "rbf_svm",
+        "linear_svm",
+    ]
+
+
+def test_quantum_configs_load():
+    screen = load_config(Path("configs/quantum_kernel_screen.yaml"))
+    final = load_config(Path("configs/quantum_kernel_final.yaml"))
+
+    assert screen.experiment_name == "quantum_kernel_screen"
+    assert final.experiment_name == "quantum_kernel_final"
+    assert screen.models[0]["type"] == "quantum_kernel_svm"
+    assert final.models[0]["type"] == "quantum_kernel_svm"
