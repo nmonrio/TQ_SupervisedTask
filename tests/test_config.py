@@ -57,3 +57,13 @@ output_dir: outputs/test
     with pytest.raises(ValueError, match="outer_splits"):
         load_config(path)
 
+
+def test_classical_baselines_config_loads():
+    config = load_config(Path("configs/classical_baselines.yaml"))
+
+    assert config.experiment_name == "classical_baselines"
+    assert [model["type"] for model in config.models] == [
+        "rbf_svm",
+        "rbf_svm",
+        "linear_svm",
+    ]
