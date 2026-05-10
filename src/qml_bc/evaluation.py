@@ -15,7 +15,7 @@ from qml_bc.metrics import classification_metrics
 from qml_bc.models import ClassifierProtocol, QuantumKernelSVC, build_classical_model
 from qml_bc.preprocessing import TabularPreprocessor
 from qml_bc.quantum_kernel import QuantumStateKernel, StatevectorFeatureMap
-from qml_bc.splitting import SplitIndices, make_inner_splits, make_outer_splits
+from qml_bc.splitting import make_inner_splits, make_outer_splits
 
 
 def run_experiment(config: ExperimentConfig) -> pd.DataFrame:
@@ -170,4 +170,3 @@ def _quantum_value(candidate: CandidateSpec, key: str) -> Any:
     if candidate.quantum is None:
         return None
     return candidate.quantum.get(key)
-
