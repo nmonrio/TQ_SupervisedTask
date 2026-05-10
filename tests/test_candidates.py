@@ -137,3 +137,18 @@ def test_quantum_candidate_expansion_includes_encoding_and_depth():
     assert candidate.model_type == "quantum_kernel_svm"
     assert candidate.quantum == {"encoding": "angle_y", "depth": 1, "alpha": 1.0}
 
+
+def test_quantum_screen_candidate_count_is_not_explosive():
+    config = load_config("configs/quantum_kernel_screen.yaml")
+
+    candidates = expand_candidates(config)
+
+    assert len(candidates) == 36
+
+
+def test_quantum_final_candidate_count_is_not_explosive():
+    config = load_config("configs/quantum_kernel_final.yaml")
+
+    candidates = expand_candidates(config)
+
+    assert len(candidates) == 36

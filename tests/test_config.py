@@ -67,3 +67,13 @@ def test_classical_baselines_config_loads():
         "rbf_svm",
         "linear_svm",
     ]
+
+
+def test_quantum_configs_load():
+    screen = load_config(Path("configs/quantum_kernel_screen.yaml"))
+    final = load_config(Path("configs/quantum_kernel_final.yaml"))
+
+    assert screen.experiment_name == "quantum_kernel_screen"
+    assert final.experiment_name == "quantum_kernel_final"
+    assert screen.models[0]["type"] == "quantum_kernel_svm"
+    assert final.models[0]["type"] == "quantum_kernel_svm"
